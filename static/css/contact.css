@@ -1,0 +1,111 @@
+/* src/components/Contact.css */
+
+.container {
+    display: flex;
+    height: 125vh;
+    width: 100%;
+    align-items: center;
+    background-color: #87b9de;
+    padding: 20px; /* Added padding for better spacing */
+    box-sizing: border-box; /* Ensures padding is included in height */
+}
+
+.container > div {
+    padding: 20px;
+    font-size: 30px;
+    align-items: center;
+}
+
+.address {
+    font-size: 25px;
+}
+
+.delhi {
+    font-size: 30px;
+}
+
+.form {
+    margin-left: 110px;
+    height: 65%;
+    width: 32%;
+    border-radius: 40px;
+    background-color: rgba(154, 193, 222, 0.68);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+    transition: transform 0.3s; /* Smooth transform effect */
+}
+
+.form:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.social-media {
+    width: 25%;
+    margin-left: 85px;
+    align-items: center;
+}
+
+.social-media > div {
+    margin-bottom: 50px;
+    background-color: #418cc2;
+    height: 50px;
+    width: 200%;
+    text-align: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 25px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.social-media > div:hover {
+    background-color: #3a7fb6; /* Darker shade on hover */
+}
+
+.social-icon {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.center {
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.custom-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold; /* Make link text bold */
+}
+
+.custom-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+@keyframes changeColor {
+    0% {
+        background-color: #b7d7f0;
+    }
+    50% {
+        background-color: #87b9de;
+    }
+    100% {
+        background-color: #b7d7f0;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    .form {
+        margin: 20px auto;
+        width: 90%;
+        height: auto;
+    }
+    .social-media {
+        width: 90%;
+        margin: 20px auto;
+    }
+}

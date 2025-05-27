@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@500&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* 
+:root {
+    --primary-text-color: #183b56;
+    --secondary-text-color: #577592;
+    --accent-color: #2294ed;
+    --accent-color-dark: #1d69a3;
+} */
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: var(--primary-text-color);
+    line-height: 1.6;
+    background-color: #f5f5f5;
+}
+
+.container-fluid{
+    background-color:#03045E;
+}
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+    height: 12px; /* Height of the scrollbar (for horizontal scrollbars) */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light gray background for the track */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: blue; /* Blue color for the scrollbar thumb */
+    border-radius: 6px; /* Round edges */
+    border: 3px solid #f1f1f1; /* Padding around the thumb */
+}
+
+/* Style the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: darkblue; /* Darker blue when hovered */
+}
+
+/* Navbar */
+.navbar {
+    background-color: navy; /* Changed to navy blue */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -0.5rem;
+}
+
+#logo {
+    width: 4rem;
+    margin-right: 15px;
+}
+
+.navbar .navbar-brand {
+    color: #CAF0F8;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.navbar .navbar-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.navbar .nav-item {
+    margin-right: 20px;
+}
+
+.navbar .nav-link {
+    color: #CAF0F8;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar .nav-item .nav-link.active {
+    color: #caf0f8;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar .nav-item .nav-link.active:hover{
+    color: #00B4D8;
+}
+
+
+.navbar .nav-link:hover {
+    color: #00B4D8;
+}
+
+.navbar .navbar-toggler {
+    border-color: #023E8A;
+}
+
+.navbar .navbar-toggler-icon {
+    background-color: #00B4D8;
+}
+
+.navbar .dropdown-menu {
+    background-color: #023E8A;
+}
+
+.navbar .dropdown-item {
+    color: #CAF0F8;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #00B4D8;
+    color: #03045E;
+}
+
+.navbar .btn-outline-success {
+    color: #FFFFFF;
+    border-color: #00B4D8;
+    margin-left: 20px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .btn-outline-success:hover {
+    color: #03045E;
+    background-color: #CAF0F8;
+    border-color: #00B4D8;
+}
+
+.page-link {
+    text-decoration: none;
+    color: var(--primary-text-color);
+    transition: color 0.3s;
+}
+
+.page-link:hover {
+    color: var(--accent-color);
+}
+
+.skypredict {
+    color: white;
+    margin-left: 20px;
+}
+
+p {
+    font-family: "Roboto", sans-serif;
+    color: var(--secondary-text-color);
+    line-height: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+ul {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 1180px;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.card {
+    width: 360px;
+    min-height: 400px;
+    box-shadow: 0 0 4px #d4ecff;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 1px 1px 8px #d4ecff;
+    background-color: #f9fdff;
+    transform: translateY(-2px);
+}
+
+.card-header img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 12px;
+}
+
+.news-source {
+    margin-block: 12px;
+    color: var(--primary-text-color);
+}

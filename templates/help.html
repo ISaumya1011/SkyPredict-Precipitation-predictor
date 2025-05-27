@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/help.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Basic styles for the chatbot */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 25px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbot {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: none;
+            flex-direction: column;
+        }
+
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-messages {
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .message {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .user {
+            background-color: #e1ffc7;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chatbot-input button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .chatbot-input button:hover {
+            background-color: #0056b3;
+        }
+        .dropdown-menu {
+    z-index: 1055; /* Higher than other overlapping elements */
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/logo.png" id="logo">
+                <span id="skypredict">SkyPredict</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('news') }}">News</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="helpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Help
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="helpDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('help') }}">Emergency Contacts</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('help') }}">Safety Measures</a></li>
+                        </ul>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('contact') }}">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <h2>Precautions</h2>
+    <div class="flex-container"> 
+        <div class="content">
+            <p style="font-size: 20px"><b>Precautions For Flood</b></p>
+            <ul>
+                <li>Avoid building homes in flood prone areas unless you elevate and reinforce your home. </li>
+                <li>Elevate the furnace, water heater, and electric panel if susceptible to flooding.</li>
+                <li>Protect Your Property: Elevate electrical appliances and utilities to reduce damage. If time allows, move valuable items to higher locations.</li>
+                <li>Prepare an Emergency Kit: Assemble a kit with essentials such as non-perishable food, water, medications, a flashlight, batteries, and a first aid kit.</li>
+                <li>Avoid Using Electrical Equipment: Do not use electrical appliances if you are wet or standing in water, and avoid handling electrical equipment during a flood. Elevate the furnace, water heater, and electric panel if susceptible to flooding.</li>
+                <li>Install "Check Valves" in sewer traps to prevent floodwater from backing up into the drains of your home.</li>
+            </ul>
+        </div>
+        <div class="content">
+            <p style="font-size: 20px"><b>Precautions For Cyclone</b></p>
+            <ul>
+                <li>Stay Informed: Keep track of cyclone forecasts and warnings through reliable sources like weather channels, local news, and emergency alert systems.</li>
+                <li>Prepare an Emergency Kit: Assemble a kit with essentials including non-perishable food, water, medications, a flashlight, batteries, a first aid kit, and important documents.</li>
+                <li>Create a Family Emergency Plan: Develop a plan that includes evacuation routes, meeting points, and communication methods. Ensure all family members are aware of the plan.</li>
+                <li>Know Your Evacuation Routes: Identify and plan for evacuation routes to shelters or safer locations. Practice evacuating if possible.</li>
+                <li>Stock Up on Supplies: Buy enough food, water, and other necessities to last at least 72 hours, considering potential disruptions to supply chains.</li>
+            </ul>
+        </div>
+        <div class="content">
+            <p style="font-size: 20px"><b>Precautions For Landslides</b></p>
+            <ul>
+                <li>Stay Informed: Monitor local news, weather channels, and emergency alert systems for landslide warnings and updates.</li>
+                <li>Prepare an Emergency Kit: Assemble a kit with essentials such as non-perishable food, water, medications, a flashlight, batteries, a first aid kit, and important documents. Include a whistle to signal for help.</li>
+                <li>Create a Family Emergency Plan: Develop a plan that includes evacuation routes, meeting points, and communication methods.</li>
+                <li>Stock Up on Supplies: Have enough food, water, and other necessities to last at least 72 hours. Consider potential road blockages and supply disruptions due to landslides.</li>
+                <li>Avoid Hazardous Areas: Stay away from steep slopes, areas near streams, and other known landslide zones, especially during or after heavy rains.</li>
+              </ul>
+        </div>
+    </div>
+    <h2 font-size: 100px>Safety Measures</h2>
+    <div class="flex-container"> 
+        <div class="content1">
+            <p style="font-size: 20px"><b>Safety Measures For Flood</b></p>
+            <ul>
+                <li>Be Cautious After the Flood: Once the floodwaters recede, be careful of hazards such as contaminated water, weakened structures, and displaced wildlife.</li>
+                <li>Evacuate if Necessary: Follow evacuation orders promptly. Know your evacuation routes and have a plan for how to reach safety.</li>
+                <li>Avoid Floodwaters: Stay away from floodwaters as they can be contaminated and contain hazardous debris. Even shallow water can be dangerous due to strong currents.</li>
+                <li>Move to Higher Ground: If you are in a flood-prone area, move to higher ground immediately. This is crucial for both your safety and that of your family.</li>
+                <li>Secure Important Documents: Keep important documents (like IDs, insurance papers) in a waterproof container or a safe place that you can easily access.</li>
+            </ul>
+         </div>
+        <div class="content1">
+            <p style="font-size: 20px"><b>Safety Measures For Cyclone</b></p>
+            <ul>
+                <li>Stay in the interior portion of your house, away from windows, skylights, and glass doors</li>
+                <li>Keep several flashlights and extra batteries handy.</li>
+                <li>If your house is damaged by the storm you should turn the water and gas off at the main valves.</li>
+                <li>Use Caution with Power: Avoid using electrical appliances and touch electrical equipment if you are wet. Be cautious of any exposed wires or damage to electrical systems.</li>
+                <li>Be Prepared for Power Outages: Have a flashlight and extra batteries available. If the power goes out, use battery-powered lights instead of candles to reduce the risk of fire.</li>
+                <li>Wait for Official All-Clear: Do not leave your shelter until local authorities declare it is safe. There may be secondary hazards or additional cyclonic activity.</li>
+            </ul>
+        </div>
+        <div class="content1">
+            <p style="font-size: 20px"><b>Safety Measures For Landslides</b></p>
+            <ul>
+                <li>Know Your Evacuation Routes: Identify and plan for evacuation routes to safer ground or shelters. Be aware of the quickest way to move away from slopes, cliffs, and other potential landslide zones.</li>
+                <li>Inspect and Maintain Your Property: Regularly inspect your property for signs of potential landslides, such as cracks in the ground, doors, or windows that stick, or tilting trees. Ensure proper drainage to prevent water from accumulating, which can trigger landslides.</li>
+                <li>Be Prepared for Evacuations: Have a flashlight, batteries, and emergency kit ready in case you need to evacuate quickly. Keep vehicles fueled and facing the direction of a quick exit.</li>
+                <li>Wait for Official All-Clear: Do not return to landslide-prone areas until authorities declare it safe. Secondary landslides or ongoing hazards may still be present.</li>
+            </ul>
+        </div>
+    </div>
+    <h2 font-size: 80px>Helpline Numbers:</h2>
+    <div class="flex-container"> 
+        <div class="content2">
+            <ul>
+                <li>0921847874964126</li>
+                <li>0921847874964126</li>
+                <li>0921847874964126</li>
+            </ul>
+         </div> 
+    </div>
+    <!-- <script src="safety_script.js"></script> -->
+     <!-- Chatbot icon and chatbot box -->
+    <div class="chatbot-icon" onclick="toggleChatbot()">💬</div>
+
+    <div id="chatbot" class="chatbot">
+        <div class="chatbot-header">
+            <h4>FAQ Chatbot</h4>
+            <button onclick="toggleChatbot()">X</button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Ask a question..." />
+            <button onclick="handleSend()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const faqData = {
+            "What is your return policy?": "Our return policy is 30 days with a receipt.",
+            "What are your hours of operation?": "We are open from 9am to 9pm, Monday to Saturday.",
+            // Add more FAQs here
+        };
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.style.display = chatbot.style.display === 'none' || chatbot.style.display === '' ? 'flex' : 'none';
+        }
+
+        function handleSend() {
+            const input = document.getElementById('chatbot-input');
+            const messagesContainer = document.getElementById('chatbot-messages');
+
+            if (input.value.trim()) {
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = input.value;
+                messagesContainer.appendChild(userMessage);
+
+                const botResponse = faqData[input.value.trim()] || "Hello, how can I help you?";
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                botMessage.textContent = botResponse;
+                messagesContainer.appendChild(botMessage);
+
+                input.value = '';
+                messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the bottom
+            }
+        }
+    </script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
